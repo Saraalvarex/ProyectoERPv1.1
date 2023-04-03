@@ -202,8 +202,9 @@ namespace ProyectoERP.Repositories
             SqlParameter pamrutafact = new SqlParameter("@FACTURA", rutafact);
             SqlParameter pamcodfactura = new SqlParameter("@CODFACTURA", -1);
             pamcodfactura.Direction = ParameterDirection.Output;
-            var consulta = await this.context.Database.ExecuteSqlRawAsync(sql, pamidalumno, pamrutafact, pamcodfactura);
-            return consulta;
+            await this.context.Database.ExecuteSqlRawAsync(sql, pamidalumno, pamrutafact, pamcodfactura);
+            int codfactura = (int)pamcodfactura.Value;
+            return codfactura;
         }
         public async Task<List<AlumnoPagos>> GetAlumnosGrupoAsync(string codgrupo)
         {

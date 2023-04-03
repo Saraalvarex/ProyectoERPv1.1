@@ -57,7 +57,7 @@ namespace ProyectoERP.Controllers
             string rutaArchivoInicial = helperPath.MapPath("FACTURA.xlsx", Folders.Facturas);
             var file = new FileInfo(rutaArchivoInicial);
             var package = new ExcelPackage(file);
-            //Aqui cojo la hoja de dentro del excell
+            //Aqui cojo la hoja de trabajo del excell donde quiero escribir
             var sheet = package.Workbook.Worksheets["Hoja1"];
             //Agregar los datos de la factura
             sheet.Cells["B18"].Value = nombrealumno;
@@ -67,18 +67,21 @@ namespace ProyectoERP.Controllers
             sheet.Cells["G22"].Value = pago;
             sheet.Cells["G17"].Value = fecha.Value;
             sheet.Cells["G18"].Value = dni;
+            //Calcula todas las fórmulas y actualiza los valores de las celdas
+            sheet.Calculate();
 
             //Guardamos el archivo de Excel en la ruta
             string nombreSinEspacios = nombrealumno.Replace(" ", ""); //quitamos todos los espacios en blanco
             int codfactura = await this.repo.InsertFactAsync(idalumno, "\\" + nombreSinEspacios);
-            string rutaArchivoFinal = helperPath.MapPath(nombreSinEspacios + "_" + codfactura + ".xlsx", Folders.Facturas);
-
-            var fileModificado = new FileInfo(rutaArchivoFinal);
+            sheet.Cells["G16"].Value = codfactura;
+            string rutaArchivoExcel = helperPath.MapPath(nombreSinEspacios + "_" + codfactura + ".xlsx", Folders.Facturas);
+            
+            var fileModificado = new FileInfo(rutaArchivoExcel);
             package.SaveAs(fileModificado);
 
-            // Convertir el archivo de Excel a PDF y guardarlo en una ruta específica
+            // Convertimos el archivo de Excel a PDF y guardarlo en una ruta específica
             string rutaArchivoPdf = helperPath.MapPath(nombreSinEspacios + "_" + codfactura + ".pdf", Folders.Facturas);
-            string pdfFilePath = helperFact.ConvertToPdf(rutaArchivoFinal, rutaArchivoPdf);
+            string pdfFilePath = helperFact.ConvertToPdf(rutaArchivoExcel, rutaArchivoPdf);
 
             // Abre el archivo PDF en el programa predeterminado del usuario
             ProcessStartInfo startInfo = new ProcessStartInfo
