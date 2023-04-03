@@ -1,0 +1,51 @@
+﻿@model Grupo
+@{
+    ViewData["Title"] = "Index _Grupo";
+    List<Curso> cursos = ViewBag.CURSOS as List<Curso>;
+}
+@*TABLA GRUPO*@
+<div class="overflow-x-auto">
+    <div class="inline-block min-w-full align-middle">
+        <div class="overflow-hidden shadow">
+            <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+                <thead class="bg-gray-100 dark:bg-gray-700">
+                    <tr>
+                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                            Grupo
+                        </th>
+                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                            Curso
+                        </th>
+                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                            Turno
+                        </th>
+                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                            Dias
+                        </th>
+                        <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                            Fecha de inicio
+                        </th>
+                        @*<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                        Actions
+                        </th>*@
+                    </tr>
+                </thead>
+                @if (Model != null)
+                {
+                    <tbody id="tbodyGrupos" class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <a asp-controller="Alumnos" asp-action="Index" asp-route-codgrupo="@Model.CodGrupo">@Model.CodGrupo</a>
+                                </td>
+                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">@Model.Curso</td>
+                                <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">@Model.Turno</td>
+                                <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">@Model.Dias</td>
+                                <td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">@Model.FechaInicio.ToString()</td>
+                            </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+@*FIN TABLA GRUPO*@

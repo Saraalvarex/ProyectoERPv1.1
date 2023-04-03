@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@*<h1>Bienvenido @Context.User.Identity.Name</h1>
+<ul class="list-group">
+    <li class="list-group-item">Oficio @Context.User.FindFirst(ClaimTypes.Role).Value</li>
+    <li class="list-group-item">Salario @Context.User.FindFirst("Salario")</li>
+    <li class="list-group-item">Departamento @Context.User.FindFirst("Departamento")</li>
+</ul>
+<h2>Todos los claims</h2>
+<ul>
+    @foreach (Claim claim in Context.User.Claims)
+    {
+        <li>@claim.Type, <b>@claim.Value</b></li>
+    }
+</ul>*@
