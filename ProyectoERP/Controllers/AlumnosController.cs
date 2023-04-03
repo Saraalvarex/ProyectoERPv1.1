@@ -45,7 +45,8 @@ namespace ProyectoERP.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        public async Task<IActionResult> GenerarFactura(string dni, int idalumno, string nombrealumno, string direccion, int pago, string concepto, DateTime? fecha, string? curso)
+        public async Task<IActionResult> GenerarFactura(string dni, int idalumno, string nombrealumno,
+            string direccion, int pago, string concepto, DateTime? fecha, string? curso)
         {
             if (fecha == null)
             {
@@ -79,11 +80,11 @@ namespace ProyectoERP.Controllers
             var fileModificado = new FileInfo(rutaArchivoExcel);
             package.SaveAs(fileModificado);
 
-            // Convertimos el archivo de Excel a PDF y guardarlo en una ruta específica
+            // Convertimos el archivo de Excel a PDF y guardamos en una ruta específica
             string rutaArchivoPdf = helperPath.MapPath(nombreSinEspacios + "_" + codfactura + ".pdf", Folders.Facturas);
             string pdfFilePath = helperFact.ConvertToPdf(rutaArchivoExcel, rutaArchivoPdf);
 
-            // Abre el archivo PDF en el programa predeterminado del usuario
+            // Abre el archivo PDF en nuestro navegador predeterminado
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = pdfFilePath,

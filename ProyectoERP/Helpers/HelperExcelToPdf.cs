@@ -1,6 +1,4 @@
 ﻿using Aspose.Cells;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace ProyectoERP.Helpers
 {
@@ -12,7 +10,6 @@ namespace ProyectoERP.Helpers
             Workbook workbook = new Workbook(excelFilePath);
             // Guardo doucmento en formato PDF
             workbook.Save(pdfFilePath, SaveFormat.Pdf);
-
             return pdfFilePath;
         }
     }

@@ -183,6 +183,7 @@ namespace ProyectoERP.Repositories
                 }
             }
         }
+
         //ALUMNOSPAGOS
         public async Task InsertAlumno(string dni, string nombrealumno, int tlf, string email, string direccion, string? foto)
         {
@@ -195,6 +196,7 @@ namespace ProyectoERP.Repositories
             SqlParameter pamfoto = new SqlParameter("@FOTO", "woman1.jpg");
             await this.context.Database.ExecuteSqlRawAsync(sql, pamdni, pamnombre, pamtlf, pamemail, pamdireccion, pamfoto);
         }
+        
         public async Task<int> InsertFactAsync(int idalumno, string rutafact)
         {
             string sql = "SP_INSERT_FACTURA @IDALUMNO, @FACTURA, @CODFACTURA OUT";
@@ -206,6 +208,7 @@ namespace ProyectoERP.Repositories
             int codfactura = (int)pamcodfactura.Value;
             return codfactura;
         }
+
         public async Task<List<AlumnoPagos>> GetAlumnosGrupoAsync(string codgrupo)
         {
             var grupos = from datos in this.context.AlumnosPagos
