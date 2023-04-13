@@ -8,7 +8,7 @@ namespace ProyectoERP.Helpers
         {
             // Creo instancia del objeto Workbook con el archivo de Excel
             Workbook workbook = new Workbook(excelFilePath);
-            // Guardo doucmento en formato PDF
+            // Guardo documento en formato PDF
             workbook.Save(pdfFilePath, SaveFormat.Pdf);
             return pdfFilePath;
         }
